@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171715">
+  <title>Moda Custom — Vista sua ideia</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" th:href="@{/css/style.css}">
+  <script src="app.js" th:src="@{/js/app.js}" defer></script>
+</head>
+<body>
+  <div class="announcement">
+    <span>✦</span> SUA IDEIA, SEU ESTILO
+    <i>—</i> PERSONALIZE SEM LIMITES <span>✦</span>
+  </div>
+
+  <header class="site-header">
+    <div class="header-main">
+      <a class="brand" href="#inicio" aria-label="Moda Custom - início">
+        <img id="brandLogo" src="/images/logo.png" alt="Logo Moda Custom"
+             onerror="this.style.display='none';document.getElementById('brandPlaceholder').style.display='grid'">
+        <span id="brandPlaceholder" class="brand-monogram" style="display:none">MC</span>
+        <span class="brand-wordmark">MODA<span>CUSTOM</span>
+          <small>USE YOUR IMAGINATION</small>
+        </span>
+      </a>
+
+      <form class="search" id="searchForm" role="search">
+        <span class="search-icon">⌕</span>
+        <input id="searchInput" type="search"
+               placeholder="Buscar peças, estilos ou lojas..."
+               aria-label="Buscar peças, estilos ou lojas">
+        <button type="submit">Buscar</button>
+      </form>
+
+      <div class="header-actions">
+        <button class="action-button" id="favTop" aria-label="Abrir favoritos">
+          <span class="action-icon">♡</span>
+          <span class="action-label">Favoritos</span>
+          <b id="favCount">0</b>
+        </button>
+
+        <button class="action-button" id="cartTop" aria-label="Abrir carrinho">
+          <span class="action-icon">▱</span>
+          <span class="action-label">Carrinho</span>
+          <b id="cartCount">0</b>
+        </button>
+
+        <button class="action-button seller-action" id="sellerOpen">
+          <span class="action-icon">✳</span>
+          <span class="action-label">Vender</span>
+        </button>
+
+        <button class="action-button signup-action" id="clientOpen">
+          <span class="action-icon">＋</span>
+          <span class="action-label">Cadastrar</span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a class="nav-link active" href="#inicio"><span>⌂</span> Início</a>
+      <a class="nav-link" href="#explorar"><span>✦</span> Explorar</a>
+      <a class="nav-link" href="#lojas"><span>▦</span> Lojas independentes</a>
+      <a class="nav-link" href="#personalizar"><span>✎</span> Personalize sua roupa</a>
+      <a class="nav-link" href="#sobre"><span>◈</span> Sobre nós</a>
+      <span class="nav-note">MODA AUTORAL · FEITA POR VOCÊ</span>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow"><span>✦</span> MODA AUTORAL, DO SEU JEITO</p>
+        <h1>Vista o que você ama.<br><em>Crie o que é seu.</em></h1>
+        <p class="hero-description">
+          Camisetas de música, cultura pop, terceirão e streetwear.
+          Encontre criadores independentes ou transforme sua própria
+          ideia em uma peça única.
+        </p>
+
+        <div class="hero-buttons">
+          <a class="button button-gold" href="#explorar">Explorar estampas <span>↗</span></a>
+          <a class="button button-outline" href="#personalizar">Criar minha camiseta</a>
+        </div>
+
+        <div class="hero-highlights">
+          <span>✦ Estampas criativas</span>
+          <span>✦ Lojas independentes</span>
+          <span>✦ Seu estilo, suas regras</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-photo"></div>
+        <div class="hero-frame"></div>
+        <div class="hero-label">
+          <small>MC / ORIGINALS</small>
+          <strong>BE YOUR OWN BRAND.</strong>
+        </div>
+        <div class="hero-stamp">DROP<br><b>01 / 26</b></div>
+      </div>
+    </section>
+
+    <section class="section collection-section" id="explorar">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">ENCONTRE SUA PRÓXIMA FAVORITA</p>
+          <h2>Estampas para <em>se expressar.</em></h2>
+          <p class="section-subtitle">
+            Explore modelos únicos e descubra a loja por trás de cada criação.
+          </p>
+        </div>
+        <div class="section-side-note">
+          <span class="gold-dot"></span> NOVAS IDEIAS, NOVOS CRIADORES
+        </div>
+      </div>
+
+      <div class="filter-bar" id="productFilters">
+        <button class="filter active" data-category="Todos">Tudo</button>
+        <button class="filter" data-category="Música">Música & artistas</button>
+        <button class="filter" data-category="Cultura pop">Cultura pop</button>
+        <button class="filter" data-category="Terceirão">Terceirão</button>
+        <button class="filter" data-category="Esporte">Esporte</button>
+        <button class="filter" data-category="Streetwear">Streetwear</button>
+        <button class="filter" data-category="Personalizável">Básicas para personalizar</button>
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
+      <p class="empty-message hidden" id="emptyState">
+        Não encontramos peças com essa busca. Experimente outra palavra ou categoria.
+      </p>
+
+      <div class="stores-intro" id="lojas">
+        <div>
+          <p class="eyebrow">CONHEÇA QUEM CRIA</p>
+          <h2>Lojas com <em>identidade própria.</em></h2>
+          <p class="section-subtitle">
+            De streetwear a camisetas de turma: descubra dez lojas e suas coleções.
+          </p>
+        </div>
+        <span class="stores-count">05 CATEGORIAS <b>·</b> 10 CRIADORES</span>
+      </div>
+
+      <div class="filter-bar store-filter-bar" id="storeFilters">
+        <button class="filter active" data-store-category="Todas">Todas as lojas</button>
+        <button class="filter" data-store-category="Streetwear">Streetwear</button>
+        <button class="filter" data-store-category="Música & artistas">Música & artistas</button>
+        <button class="filter" data-store-category="Terceirão">Terceirão</button>
+        <button class="filter" data-store-category="Esporte">Esporte</button>
+        <button class="filter" data-store-category="Cultura pop">Cultura pop</button>
+      </div>
+
+      <div class="store-grid" id="lojasGrid"></div>
+    </section>
+
+    <section class="custom-section" id="personalizar">
+      <div class="custom-image">
+        <span class="custom-image-note">IDEIA SUA.<br>PEÇA ÚNICA.</span>
+      </div>
+
+      <div class="custom-copy">
+        <p class="eyebrow">SEU ESTILO COMEÇA NO PAPEL</p>
+        <h2>Você imagina.<br><em>A gente dá forma.</em></h2>
+        <p>
+          Escolha o tipo de peça, a cor e o tema da estampa. Pode ser
+          para o terceirão, uma referência musical, uma frase ou uma arte autoral.
+        </p>
+        <button class="button button-gold" id="customOpen">
+          Começar personalização <span>↗</span>
+        </button>
+        <small>Seu próximo look começa com uma ideia.</small>
+      </div>
+    </section>
+
+    <section class="about-section" id="sobre">
+      <div>
+        <p class="eyebrow">A MODA CUSTOM</p>
+        <h2>Vista uma ideia.<br><em>Conte sua história.</em></h2>
+      </div>
+
+      <div class="about-copy">
+        <p>
+          Conectamos clientes e vendedores independentes em uma vitrine
+          de roupas personalizadas. Cada loja tem seu estilo, suas coleções
+          e sua história — e você escolhe o que combina com a sua.
+        </p>
+        <a href="#lojas" class="text-link">Conhecer os criadores <span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="seller-banner">
+      <div>
+        <p class="eyebrow">VOCÊ CRIA. A GENTE CONECTA.</p>
+        <h2>Tem uma marca ou uma ideia?</h2>
+        <p>Abra sua loja e apresente suas estampas para a comunidade.</p>
+      </div>
+      <button class="button button-gold" id="sellerOpen2">Abrir minha loja ↗</button>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand footer-brand" href="#inicio">
+      <span class="brand-monogram">MC</span>
+      <span class="brand-wordmark">MODA<span>CUSTOM</span>
+        <small>USE YOUR IMAGINATION</small>
+      </span>
+    </a>
+    <small>© 2026 Moda Custom · Projeto demonstrativo</small>
+    <div>
+      <a href="#lojas">Lojas</a>
+      <a href="#sobre">Sobre nós</a>
+      <a href="#personalizar">Personalização</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="clientDialog">
+    <button class="close" data-close="clientDialog" aria-label="Fechar">×</button>
+    <p class="eyebrow">BEM-VINDO À MODA CUSTOM</p>
+    <h2>Crie sua conta</h2>
+    <form class="form-grid" id="clientForm">
+      <label>Nome completo
+        <input required name="nome" placeholder="Seu nome">
+      </label>
+      <label>E-mail
+        <input required type="email" name="email" placeholder="voce@email.com">
+      </label>
+      <label>Senha
+        <input required type="password" minlength="6" name="senha" placeholder="Mínimo de 6 caracteres">
+      </label>
+      <label>Estilo favorito
+        <select name="estilo">
+          <option>Streetwear</option>
+          <option>Música & artistas</option>
+          <option>Terceirão</option>
+          <option>Esporte</option>
+          <option>Cultura pop</option>
+        </select>
+      </label>
+      <button class="button button-gold" type="submit">Cadastrar</button>
+      <p class="form-note">Demonstração: o cadastro ainda não envia dados ao servidor.</p>
+    </form>
+  </dialog>
+
+  <dialog id="sellerDialog">
+    <button class="close" data-close="sellerDialog" aria-label="Fechar">×</button>
+    <p class="eyebrow">VENHA CRIAR COM A GENTE</p>
+    <h2>Abra sua loja</h2>
+    <form class="form-grid" id="sellerForm">
+      <label>Nome do responsável
+        <input required name="responsavel" placeholder="Seu nome completo">
+      </label>
+      <label>Nome da loja/marca
+        <input required name="marca" placeholder="Nome da sua loja">
+      </label>
+      <label>E-mail comercial
+        <input required type="email" name="email" placeholder="loja@email.com">
+      </label>
+      <label>Categoria principal
+        <select name="categoria">
+          <option>Streetwear</option>
+          <option>Música & artistas</option>
+          <option>Terceirão</option>
+          <option>Esporte</option>
+          <option>Cultura pop</option>
+        </select>
+      </label>
+      <label>Descrição da loja
+        <textarea required name="descricao" placeholder="Conte sobre suas estampas e seu estilo"></textarea>
+      </label>
+      <label>Senha
+        <input required type="password" minlength="6" name="senha" placeholder="Mínimo de 6 caracteres">
+      </label>
+      <button class="button button-gold" type="submit">Criar loja demonstrativa</button>
+      <p class="form-note">Para publicar uma loja real, será necessário conectar o formulário ao Spring Boot.</p>
+    </form>
+  </dialog>
+
+  <dialog id="customDialog">
+    <button class="close" data-close="customDialog" aria-label="Fechar">×</button>
+    <p class="eyebrow">LABORATÓRIO CRIATIVO</p>
+    <h2>Personalize sua roupa</h2>
+    <form class="form-grid" id="customForm">
+      <label>Tipo de peça
+        <select name="tipo">
+          <option>Camiseta</option>
+          <option>Moletom</option>
+          <option>Baby look</option>
+          <option>Regata</option>
+          <option>Ecobag</option>
+        </select>
+      </label>
+      <label>Tema da estampa
+        <select name="tema">
+          <option>Música & artistas</option>
+          <option>Terceirão / formatura</option>
+          <option>Esporte</option>
+          <option>Cultura pop</option>
+          <option>Streetwear</option>
+          <option>Minha própria arte</option>
+        </select>
+      </label>
+      <label>Cor da peça
+        <select name="cor">
+          <option>Preta</option>
+          <option>Branca</option>
+          <option>Off-white</option>
+          <option>Areia</option>
+          <option>Verde</option>
+          <option>Azul</option>
+        </select>
+      </label>
+      <label>Texto ou ideia
+        <input name="ideia" maxlength="80" placeholder="Nome da turma, frase, tema...">
+      </label>
+      <label>Detalhes adicionais
+        <textarea name="detalhes" placeholder="Descreva como imagina sua estampa"></textarea>
+      </label>
+      <button class="button button-gold" type="submit">Salvar minha ideia</button>
+      <p class="form-note">Use apenas imagens e artes que você tenha autorização para reproduzir.</p>
+    </form>
+  </dialog>
+
+  <dialog id="storeDialog">
+    <button class="close store-close" data-close="storeDialog" aria-label="Sair da loja">× <span>Fechar loja</span></button>
+    <div id="storeDetails"></div>
+  </dialog>
+
+  <dialog id="favoritesDialog">
+    <button class="close" data-close="favoritesDialog" aria-label="Fechar">×</button>
+    <p class="eyebrow">SUAS ESCOLHAS</p>
+    <h2>Meus favoritos</h2>
+    <div id="favoriteItems"></div>
+  </dialog>
+
+  <dialog id="cartDialog">
+    <button class="close" data-close="cartDialog" aria-label="Fechar">×</button>
+    <p class="eyebrow">SUAS ESCOLHAS</p>
+    <h2>Meu carrinho</h2>
+    <div id="cartItems"></div>
+    <p class="cart-total">Total <strong id="cartTotal">R$ 0,00</strong></p>
+    <button class="button button-gold full" id="checkout">Continuar compra</button>
+  </dialog>
+
+  <dialog id="checkoutDialog">
+    <button class="close" data-close="checkoutDialog" aria-label="Fechar">×</button>
+    <p class="eyebrow">MODA CUSTOM</p>
+    <h2>Finalizar compra</h2>
+    <div id="checkoutResumo"></div>
+
+    <form id="checkoutForm" class="form-grid">
+      <label>Nome completo
+        <input name="nome" required placeholder="Seu nome">
+      </label>
+      <label>E-mail
+        <input name="email" type="email" required placeholder="voce@email.com">
+      </label>
+      <label>CEP
+        <input name="cep" required placeholder="00000-000">
+      </label>
+      <label>Endereço e número
+        <input name="endereco" required placeholder="Rua, número e complemento">
+      </label>
+      <label>Cidade
+        <input name="cidade" required placeholder="Sua cidade">
+      </label>
+      <label>Forma de pagamento
+        <select name="pagamento" required>
+          <option value="">Selecione</option>
+          <option value="PIX">PIX</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Boleto">Boleto</option>
+        </select>
+      </label>
+      <button class="button button-gold" type="submit">Confirmar pedido</button>
+      <p class="form-note">Demonstração: nenhum pagamento real será processado.</p>
+    </form>
+  </dialog>
+</body>
+</html>
