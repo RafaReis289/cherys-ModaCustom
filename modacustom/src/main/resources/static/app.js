@@ -1,1139 +1,835 @@
-// Moda Custom - vitrine, lojas, favoritos e carrinho
-// Os dados abaixo são demonstrativos e podem ser alterados conforme o projeto crescer.
+"use strict";
 
-const imagensPinterest = [
-    "https://i.pinimg.com/736x/4e/ae/e6/4eaee65ce514639057bdf307b4eb0b17.jpg",
-    "https://i.pinimg.com/736x/dc/ab/92/dcab924bdc7b10b9ec876775f8a8b123.jpg",
-    "https://i.pinimg.com/736x/ee/7c/86/ee7c86e679dfd5d904ac78e949f49db5.jpg",
-    "https://i.pinimg.com/1200x/6d/ee/2c/6dee2c6a8b159c1966fb30b3b977967f.jpg",
-    "https://i.pinimg.com/736x/00/db/c4/00dbc4faca9f607a1feb9d5c84a4cdb2.jpg",
-    "https://i.pinimg.com/736x/14/b5/3a/14b53a3e317f4ff468653fd16966db1a.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbVtg5zr_73-bFPsZY5LIvsG6-wyTPwqXgwQ7gnKKYgg&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9BXE4Dvl6M0ZtRsNbNAU2wIK0AOdt6Kpv2IDpwKWrlA&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuitxURewKuYNfnik586gG6KfYzVz63YZCLQU88b0QyA&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyy18e-G60jGZtkG0oTiFlV23ebrOEQBcQFVvl8OtgJBcSs4bpi_Ez0h8&s=10",
-    "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRWUd_SsuteyeWvp14eZwyX5Ib1t5bOx4MK928MzvTzS38tq8ng8q994ztC8pZn2MFIn8jGRan3mMbUOy-hCSxFL3-BvKDyEtFfbfE_e8I",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGf1AxAp4fMFvov_CakR7QIw2_P5uYrdqweaoqOfEERQ&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUGHB9BdSeZQtpuYUZppYcWANjNKhWOPvIwpQr8WNTXg&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSppsu_-oK5tFN_y0W4FRFh7-cdNaC3ZbXh_EJNntrBuQ&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFh97dBbt8PPRNF8xQMY_rbnI2mpQnN0ktGcPU9zAuqQ&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAMrUT6JXAGACpTrF0dHrPXg7oTuRnS3SqwiPrMIcyHw&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtVcG7fSdd2pTzSBfGvg7PcPVjZTfPFFWei4ngXC-n3A&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvWVWxowhBAZq06RFsJ1ZM5qeiij_B1OkQ1Cx85Lnhxg&s",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQHQgUCxYz4pWC_ibnhQ20Vo3pW1234JNWY_ROtrBoSA&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxSCmT8zViDkIszy0oRRQjoiJGkFqwnMr3VJnRyrs5jw&s",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt6LqWvnYSDum_uAED0wIqgfKWvYN1YXNLzYXlzxeBIQ&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSC4galnyy8BHWY5wXloZUxLhk53bfgfIK0xtFV7QUkwg&s=10",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6Hy_DdtOYuLfQyH-z9qTLb6xP28jeLd7ZIhlnLA257Q&s=10",
-    "/images/modacustom-imagem-anexa-1.jpg",
-    "/images/modacustom-imagem-anexa-2.jpg"
-];
-
-// Links dos pins: são páginas do Pinterest, não arquivos de imagem diretos.
-const linksPinterest = [
-    "https://pin.it/qifcnNy8F",
-    "https://pin.it/3hseC0dD7",
-    "https://pin.it/NiGCwQccD",
-    "https://pin.it/2cmYidIKE",
-    "https://pin.it/6cOK9VxMH",
-    "https://pin.it/4DhSzMbG1",
-    "https://pin.it/36PIh7Ahv",
-    "https://pin.it/32XlWXEE9",
-    "https://pin.it/4ih1GiyUn",
-    "https://pin.it/6OhB4XL8b",
-    "https://pin.it/2sgC3C0s7",
-    "https://pin.it/3aG7QFxQj",
-    "https://pin.it/7J8wmNR6T",
-    "https://pin.it/6Das8NzSY",
-    "https://pin.it/7cxqMknBD",
-    "https://pin.it/4oTYUNlCb",
-    "https://pin.it/LR4y6uvjL",
-    "https://pin.it/1pzDPbfXl",
-    "https://pin.it/7rjygnXUQ",
-    "https://pin.it/2vZbD0lnl",
-    "https://pin.it/7e1C0I3yF",
-    "https://pin.it/1aTO5d0rJ",
-    "https://pin.it/3ggoAWRpI",
-    "https://pin.it/7D5LaM0g8",
-    "https://pin.it/1lZFeNzVg"
-];
-
-// Total: 50 referências únicas (25 imagens/arquivos e 25 pins do Pinterest).
-const referenciasImagens = imagensPinterest.concat(linksPinterest);
 
 const catalogo = [
-    { id: 1, nome: "Camiseta Turnê Pop", marca: "Som & Estampa", lojaId: 2, categoria: "Música", preco: 89.90, tag: "MÚSICA", img: imagensPinterest[0], descricao: "Camiseta com visual de show e cultura musical." },
-    { id: 2, nome: "Camiseta Rap & Rua", marca: "Distrito 013", lojaId: 1, categoria: "Streetwear", preco: 99.90, tag: "STREET", img: imagensPinterest[1], descricao: "Modelagem urbana para quem curte um estilo autêntico." },
-    { id: 3, nome: "Terceirão — A Última Dança", marca: "Turma em Cena", lojaId: 4, categoria: "Terceirão", preco: 74.90, tag: "TERCEIRÃO", img: imagensPinterest[2], descricao: "Modelo para formandos com opção de personalização." },
-    { id: 4, nome: "Camiseta Cultura Pop", marca: "PopLab Studio", lojaId: 9, categoria: "Cultura pop", preco: 94.90, tag: "POP CULTURE", img: imagensPinterest[3], descricao: "Uma peça para expressar seu universo e sua personalidade." },
-    { id: 5, nome: "Camiseta Esporte Club", marca: "Jogo de Rua", lojaId: 6, categoria: "Esporte", preco: 84.90, tag: "ESPORTE", img: imagensPinterest[4], descricao: "Camiseta casual esportiva para usar no treino ou no dia a dia." },
-    { id: 6, nome: "Moletom Oversized", marca: "Distrito 013", lojaId: 1, categoria: "Streetwear", preco: 189.90, tag: "OVERSIZED", img: imagensPinterest[5], descricao: "Moletom de caimento amplo com atitude urbana." },
-    { id: 7, nome: "Camiseta Ídolos da Música", marca: "Som & Estampa", lojaId: 2, categoria: "Música", preco: 99.90, tag: "FÃ-CLUBE", img: imagensPinterest[6], descricao: "Modelo com estética inspirada em pôsteres musicais." },
-    { id: 8, nome: "Terceirão Personalizado", marca: "Formei! Camisetas", lojaId: 3, categoria: "Terceirão", preco: 69.90, tag: "SUA TURMA", img: imagensPinterest[7], descricao: "Personalize com nome da sala, ano e frase." },
-    { id: 9, nome: "Camiseta Gamer & Pop", marca: "PopLab Studio", lojaId: 9, categoria: "Cultura pop", preco: 109.90, tag: "GEEK", img: imagensPinterest[8], descricao: "Peça para quem gosta de games e cultura pop." },
-    { id: 10, nome: "Camiseta Treino", marca: "Arena Custom", lojaId: 7, categoria: "Esporte", preco: 79.90, tag: "ACTIVE", img: imagensPinterest[9], descricao: "Visual esportivo para treinar ou usar no dia a dia." },
-    { id: 11, nome: "Camiseta Crie Sua Arte", marca: "Traço Livre", lojaId: 5, categoria: "Personalizável", preco: 64.90, tag: "PERSONALIZE", img: imagensPinterest[10], descricao: "Modelo básico para receber sua frase ou desenho." },
-    { id: 12, nome: "Baby Look Pop", marca: "Vibe de Fã", lojaId: 10, categoria: "Cultura pop", preco: 74.90, tag: "BABY LOOK", img: imagensPinterest[11], descricao: "Modelagem ajustada com inspiração pop." },
-    { id: 13, nome: "Camiseta Formandos", marca: "Formei! Camisetas", lojaId: 3, categoria: "Terceirão", preco: 72.90, tag: "FORMATURA", img: imagensPinterest[12], descricao: "Camiseta para guardar a lembrança do último ano." },
-    { id: 14, nome: "Street Art Tee", marca: "Traço Livre", lojaId: 5, categoria: "Streetwear", preco: 89.90, tag: "ARTE AUTORAL", img: imagensPinterest[13], descricao: "Camiseta com inspiração em arte urbana." },
-    { id: 15, nome: "Camiseta Torcida", marca: "Arena Custom", lojaId: 7, categoria: "Esporte", preco: 89.90, tag: "TORCIDA", img: imagensPinterest[14], descricao: "Modelo para grupos esportivos e torcidas." },
-    { id: 16, nome: "Camiseta Minimal", marca: "Essencial Lab", lojaId: 8, categoria: "Personalizável", preco: 59.90, tag: "BÁSICA", img: imagensPinterest[15], descricao: "Base minimalista para receber sua própria arte." },
-    { id: 17, nome: "Moletom Fã de Música", marca: "Vibe de Fã", lojaId: 10, categoria: "Música", preco: 179.90, tag: "FÃ DE MÚSICA", img: imagensPinterest[16], descricao: "Moletom para quem vive a música." },
-    { id: 18, nome: "Mascote da Turma", marca: "Turma em Cena", lojaId: 4, categoria: "Terceirão", preco: 79.90, tag: "TURMA", img: imagensPinterest[17], descricao: "Personalize com mascote, número e ano de formatura." }
+  { id: 1, nome: "Regata de sol", marca: "Som & Estampa", lojaId: 2, categoria: "Personalizável", preco: 89.90, tag: "BÁSICA", img: "img/1.jpg", descricao: "Regata branca, leve e versátil, perfeita para dias ensolarados e looks casuais." },
+  { id: 2, nome: "Camiseta Rap & Rua", marca: "Distrito 013", lojaId: 1, categoria: "Streetwear", preco: 99.90, tag: "STREET", img: "img/2.jpg", descricao: "Camiseta inspirada no rap e na cultura urbana." },
+  { id: 3, nome: "Regata lisa personalizável", marca: "Formei! Camisetas", lojaId: 3, categoria: "Personalizável", preco: 74.90, tag: "PERSONALIZÁVEL", img: "img/3.jpg", descricao: "Regata lisa que pode ser personalizada com frases ou desenhos." },
+  { id: 4, nome: "Camiseta Cultura Pop", marca: "PopLab Studio", lojaId: 4, categoria: "Cultura pop", preco: 94.90, tag: "POP CULTURE", img: "img/4.jpg", descricao: "Camiseta com temática de cultura pop." },
+  { id: 5, nome: "Camiseta Hello Kitty", marca: "PopLab Studio", lojaId: 4, categoria: "Cultura pop", preco: 84.90, tag: "POP", img: "img/5.jpg", descricao: "Camiseta temática da Hello Kitty." },
+  { id: 6, nome: "Calça Oversized", marca: "Distrito 013", lojaId: 1, categoria: "Streetwear", preco: 189.90, tag: "OVERSIZED", img: "img/6.jpg", descricao: "Calça de modelagem ampla e estilo urbano." },
+  { id: 7, nome: "Calça Ídolos da Música", marca: "Som & Estampa", lojaId: 2, categoria: "Música", preco: 99.90, tag: "FÃ-CLUBE", img: "img/7.jpg", descricao: "Calça estampada com referências musicais." },
+  { id: 8, nome: "Calça Personalizada", marca: "Formei! Camisetas", lojaId: 3, categoria: "Terceirão", preco: 69.90, tag: "SUA TURMA", img: "img/8.jpg", descricao: "Calça personalizável com nomes, frases ou estampas." },
+  { id: 9, nome: "Calça Gamer & Pop", marca: "PopLab Studio", lojaId: 4, categoria: "Cultura pop", preco: 109.90, tag: "GEEK", img: "img/9.jpg", descricao: "Calça com estilo gamer e referências à cultura pop." },
+  { id: 10, nome: "Jaqueta de caveira", marca: "Traço Livre", lojaId: 5, categoria: "Esporte", preco: 79.90, tag: "ACTIVE", img: "img/10.jpg", descricao: "Jaqueta com estampa de caveira e visual marcante." },
+  { id: 11, nome: "Jaqueta Crie Sua Arte", marca: "Traço Livre", lojaId: 5, categoria: "Personalizável", preco: 64.90, tag: "PERSONALIZE", img: "img/11.jpg", descricao: "Jaqueta personalizável com desenhos ou frases." },
+  { id: 12, nome: "Shorts Personalizáveis", marca: "Som & Estampa", lojaId: 2, categoria: "Cultura pop", preco: 74.90, tag: "CUSTOM", img: "img/12.jpg", descricao: "Shorts que podem receber estampas personalizadas." },
+  { id: 13, nome: "Camiseta Básica", marca: "Formei! Camisetas", lojaId: 3, categoria: "Terceirão", preco: 72.90, tag: "FORMATURA", img: "img/13.jpg", descricao: "Camiseta básica para usar ou personalizar." },
+  { id: 14, nome: "Jaqueta Michael Jackson", marca: "Distrito 013", lojaId: 1, categoria: "Streetwear", preco: 89.90, tag: "ARTE AUTORAL", img: "img/14.jpg", descricao: "Jaqueta inspirada em Michael Jackson." },
+  { id: 15, nome: "Camiseta Bob Esponja", marca: "PopLab Studio", lojaId: 4, categoria: "Cultura pop", preco: 89.90, tag: "POP", img: "img/15.jpg", descricao: "Camiseta temática do Bob Esponja." },
+  { id: 16, nome: "Camiseta Mãe e Filha", marca: "Traço Livre", lojaId: 5, categoria: "Personalizável", preco: 59.90, tag: "BÁSICA", img: "img/16.jpg", descricao: "Camisetas combinando para mães e filhas." },
+  { id: 17, nome: "Camiseta do Amor", marca: "Som & Estampa", lojaId: 2, categoria: "Música", preco: 179.90, tag: "AMOR", img: "img/17.jpg", descricao: "Camiseta com tema romântico." },
+  { id: 18, nome: "Camiseta de Namoro", marca: "Formei! Camisetas", lojaId: 3, categoria: "Terceirão", preco: 79.90, tag: "CASAIS", img: "img/18.jpg", descricao: "Camiseta combinando para casais." },
+  { id: 19, nome: "Camiseta VELARIS", marca: "Som & Estampa", lojaId: 2, categoria: "Música", preco: 94.90, tag: "LITERATURA", img: "img/19.jpg", descricao: "Camiseta inspirada no universo literário VELARIS." },
+  { id: 20, nome: "Camiseta VELARIS Urbana", marca: "Distrito 013", lojaId: 1, categoria: "Streetwear", preco: 79.90, tag: "URBANO", img: "img/20.jpg", descricao: "Camiseta de estilo urbano para leitores." },
+  { id: 21, nome: "Camiseta Secreta PLL", marca: "Formei! Camisetas", lojaId: 3, categoria: "Terceirão", preco: 84.90, tag: "SERIES", img: "img/21.jpg", descricao: "Camiseta inspirada na série PLL." },
+  { id: 22, nome: "Pop Style Shirt", marca: "PopLab Studio", lojaId: 4, categoria: "Cultura pop", preco: 109.90, tag: "ANIME", img: "img/22.jpg", descricao: "Camiseta de estilo pop inspirada em animes." },
+  { id: 23, nome: "FRIENDS Camiseta", marca: "Traço Livre", lojaId: 5, categoria: "Esporte", preco: 89.90, tag: "FRIENDS", img: "img/23.jpg", descricao: "Camiseta temática inspirada na série FRIENDS." },
+  { id: 24, nome: "Camiseta de Anime", marca: "Traço Livre", lojaId: 5, categoria: "Personalizável", preco: 99.90, tag: "CRIATIVO", img: "img/24.jpg", descricao: "Camiseta com temática de anime." },
+  { id: 25, nome: "Camiseta de Recado", marca: "Distrito 013", lojaId: 1, categoria: "Streetwear", preco: 199.90, tag: "CLASSIC", img: "img/25.jpg", descricao: "Camiseta com frases ou mensagens criativas." }
 ];
 
 const lojas = [
-    { id: 1, nome: "Distrito 013", categoria: "Streetwear", cidade: "São Paulo, SP", rating: "4,9", vendas: "320+", descricao: "Streetwear oversized, arte urbana e camisetas com identidade de rua.", capa: imagensPinterest[18], slogan: "Vista a rua do seu jeito." },
-    { id: 2, nome: "Som & Estampa", categoria: "Música & artistas", cidade: "São Paulo, SP", rating: "4,8", vendas: "280+", descricao: "Camisetas e moletons com estética musical.", capa: imagensPinterest[19], slogan: "Sua trilha sonora, sua camiseta." },
-    { id: 3, nome: "Formei! Camisetas", categoria: "Terceirão", cidade: "Campinas, SP", rating: "4,9", vendas: "190+", descricao: "Camisetas de terceirão, formatura e lembranças de turma.", capa: imagensPinterest[20], slogan: "A turma merece uma história." },
-    { id: 4, nome: "Turma em Cena", categoria: "Terceirão", cidade: "Santos, SP", rating: "4,7", vendas: "150+", descricao: "Estampas para turmas, viagens escolares e último ano.", capa: imagensPinterest[21], slogan: "Memórias que a gente veste." },
-    { id: 5, nome: "Traço Livre", categoria: "Streetwear", cidade: "Curitiba, PR", rating: "4,8", vendas: "210+", descricao: "Ilustrações originais, arte independente e peças personalizadas.", capa: imagensPinterest[22], slogan: "Ideias fora das linhas." },
-    { id: 6, nome: "Jogo de Rua", categoria: "Esporte", cidade: "Rio de Janeiro, RJ", rating: "4,8", vendas: "260+", descricao: "Moda esportiva casual e estampas de torcida autorais.", capa: imagensPinterest[23], slogan: "Espírito de equipe, estilo próprio." },
-    { id: 7, nome: "Arena Custom", categoria: "Esporte", cidade: "Belo Horizonte, MG", rating: "4,9", vendas: "230+", descricao: "Camisetas de treino, corrida, academia e uniformes personalizados.", capa: imagensPinterest[24], slogan: "Vista sua energia." },
-    { id: 8, nome: "Essencial Lab", categoria: "Personalizáveis", cidade: "São Paulo, SP", rating: "4,6", vendas: "170+", descricao: "Camisetas lisas e peças-base para receber sua própria arte.", capa: imagensPinterest[0], slogan: "Uma tela em branco para você." },
-    { id: 9, nome: "PopLab Studio", categoria: "Cultura pop", cidade: "Florianópolis, SC", rating: "4,8", vendas: "310+", descricao: "Estampas originais inspiradas em games e cultura pop.", capa: imagensPinterest[1], slogan: "Seu universo, seu estilo." },
-    { id: 10, nome: "Vibe de Fã", categoria: "Música & artistas", cidade: "Porto Alegre, RS", rating: "4,7", vendas: "200+", descricao: "Moda para fãs de música e festivais.", capa: imagensPinterest[2], slogan: "Leve a música com você." }
+  {
+    id: 1,
+    nome: "Distrito 013",
+    categoria: "Streetwear",
+    cidade: "São Paulo, SP",
+    rating: "4,9",
+    vendas: "320+",
+    descricao: "Streetwear urbano, modelagens amplas e estampas com atitude.",
+    capa: "img/19.jpg",
+    slogan: "Vista a rua do seu jeito."
+  },
+  {
+    id: 2,
+    nome: "Som & Estampa",
+    categoria: "Música",
+    cidade: "São Paulo, SP",
+    rating: "4,8",
+    vendas: "280+",
+    descricao: "Peças inspiradas em música, livros, shows e universos de fãs.",
+    capa: "img/20.jpg",
+    slogan: "Sua paixão, sua estampa."
+  },
+  {
+    id: 3,
+    nome: "Formei! Camisetas",
+    categoria: "Terceirão",
+    cidade: "Campinas, SP",
+    rating: "4,9",
+    vendas: "190+",
+    descricao: "Camisetas para formaturas, terceirão e lembranças de turma.",
+    capa: "img/21.jpg",
+    slogan: "A turma merece uma história."
+  },
+  {
+    id: 4,
+    nome: "PopLab Studio",
+    categoria: "Cultura pop",
+    cidade: "Florianópolis, SC",
+    rating: "4,8",
+    vendas: "310+",
+    descricao: "Estampas com referências a séries, games e cultura pop.",
+    capa: "img/22.jpg",
+    slogan: "Seu universo, seu estilo."
+  },
+  {
+    id: 5,
+    nome: "Traço Livre",
+    categoria: "Personalizáveis",
+    cidade: "Curitiba, PR",
+    rating: "4,8",
+    vendas: "210+",
+    descricao: "Arte independente e peças para transformar ideias em roupas únicas.",
+    capa: "img/23.jpg",
+    slogan: "Ideias fora das linhas."
+  }
 ];
 
-// Cada loja fica com pelo menos cinco peças na vitrine.
-function completarProdutosDasLojas() {
-    const produtosOriginais = catalogo.slice();
+/* Os 18 primeiros aparecem em Explorar. */
+const catalogoExplorar = catalogo.filter(p => p.id <= 18);
 
-    for (let i = 0; i < lojas.length; i++) {
-        const loja = lojas[i];
-        let produtosDaLoja = catalogo.filter(function (produto) {
-            return produto.lojaId === loja.id;
-        });
-        let rodada = 0;
+const $ = seletor => document.querySelector(seletor);
 
-        while (produtosDaLoja.length < 5) {
-            const base = produtosOriginais[(loja.id + rodada) % produtosOriginais.length];
-            let maiorId = 0;
+const moeda = valor => Number(valor).toLocaleString("pt-BR", {
+  style: "currency",
+  currency: "BRL"
+});
 
-            for (let j = 0; j < catalogo.length; j++) {
-                if (catalogo[j].id > maiorId) maiorId = catalogo[j].id;
-            }
-
-            const nomes = ["Edição Especial", "Camiseta Exclusiva", "Modelo Autoral", "Coleção Limitada", "Estampa Signature"];
-            let categoriaProduto = loja.categoria;
-            if (loja.categoria === "Música & artistas") categoriaProduto = "Música";
-            if (loja.categoria === "Personalizáveis") categoriaProduto = "Personalizável";
-
-            const novoProduto = {
-                id: maiorId + 1,
-                nome: nomes[produtosDaLoja.length] + " — " + loja.nome,
-                marca: loja.nome,
-                lojaId: loja.id,
-                categoria: categoriaProduto,
-                preco: Math.round((base.preco + produtosDaLoja.length * 7.5) * 100) / 100,
-                tag: "DA LOJA",
-                img: imagensPinterest[(loja.id + rodada + produtosDaLoja.length) % imagensPinterest.length],
-                descricao: "Modelo demonstrativo desta loja. A disponibilidade real depende do vendedor."
-            };
-
-            catalogo.push(novoProduto);
-            produtosDaLoja.push(novoProduto);
-            rodada++;
-        }
-    }
-}
-completarProdutosDasLojas();
-
-function selecionar(seletor) {
-    return document.querySelector(seletor);
+function ler(chave, padrao) {
+  try {
+    return JSON.parse(localStorage.getItem(chave)) ?? padrao;
+  } catch {
+    return padrao;
+  }
 }
 
-function formatarMoeda(valor) {
-    return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-}
-
-function lerDados(chave, valorPadrao) {
-    try {
-        const dados = JSON.parse(localStorage.getItem(chave));
-        return dados === null ? valorPadrao : dados;
-    } catch (erro) {
-        return valorPadrao;
-    }
-}
-
-let favoritos = lerDados("mc-favoritos", []);
-let carrinho = lerDados("mc-carrinho", []);
+let favoritos = ler("mc-favoritos", []);
+let carrinho = ler("mc-carrinho", []);
 let categoria = "Todos";
 let categoriaLoja = "Todas";
 let busca = "";
 
-function mostrarAviso(texto) {
-    const aviso = selecionar("#toast");
-    if (!aviso) return;
-    aviso.textContent = texto;
-    aviso.classList.add("show");
-    clearTimeout(window.toastTimer);
-    window.toastTimer = setTimeout(function () {
-        aviso.classList.remove("show");
-    }, 2600);
+function toast(mensagem) {
+  const elemento = $("#toast");
+  if (!elemento) return;
+
+  elemento.textContent = mensagem;
+  elemento.classList.add("show");
+
+  clearTimeout(window.mcToastTimer);
+
+  window.mcToastTimer = setTimeout(() => {
+    elemento.classList.remove("show");
+  }, 2600);
 }
 
 function salvarEstado() {
-    localStorage.setItem("mc-favoritos", JSON.stringify(favoritos));
-    localStorage.setItem("mc-carrinho", JSON.stringify(carrinho));
-    atualizarContadores();
+  localStorage.setItem("mc-favoritos", JSON.stringify(favoritos));
+  localStorage.setItem("mc-carrinho", JSON.stringify(carrinho));
+  atualizarContadores();
 }
 
 function atualizarContadores() {
-    const contadorFavoritos = selecionar("#favCount");
-    const contadorCarrinho = selecionar("#cartCount");
-    if (contadorFavoritos) contadorFavoritos.textContent = favoritos.length;
+  $("#favCount").textContent = favoritos.length;
 
-    let quantidadeTotal = 0;
-    for (let i = 0; i < carrinho.length; i++) {
-        quantidadeTotal += carrinho[i].qtd;
-    }
-    if (contadorCarrinho) contadorCarrinho.textContent = quantidadeTotal;
+  $("#cartCount").textContent = carrinho.reduce(
+    (total, item) => total + item.qtd,
+    0
+  );
 }
 
 function abrirDialog(id) {
-    const dialogo = selecionar("#" + id);
-    if (dialogo && !dialogo.open) dialogo.showModal();
+  const dialog = $("#" + id);
+
+  if (dialog && !dialog.open) {
+    dialog.showModal();
+  }
 }
+
+/* Imagens que falharem não serão substituídas por outras fotos. */
+function tratarErroImagem(img) {
+  img.onerror = null;
+  img.classList.add("image-missing");
+  img.alt = "Imagem indisponível. Confira o arquivo na pasta img.";
+}
+
+/* GRADE DE PRODUTOS */
 
 function renderProdutos() {
-    const grade = selecionar("#productGrid");
-    if (!grade) return;
+  const grade = $("#productGrid");
 
-    const lista = catalogo.filter(function (produto) {
-        const combinaCategoria = categoria === "Todos" || produto.categoria === categoria;
-        const textoProduto = (produto.nome + " " + produto.marca + " " + produto.categoria + " " + produto.descricao).toLowerCase();
-        return combinaCategoria && textoProduto.includes(busca.toLowerCase());
-    });
+  const produtos = catalogoExplorar.filter(produto => {
+    const correspondeCategoria =
+      categoria === "Todos" || produto.categoria === categoria;
 
-    grade.innerHTML = lista.map(function (produto) {
-        const estaFavoritado = favoritos.includes(produto.id);
-        return '<article class="product">' +
-            '<div class="product-image"><img src="' + produto.img + '" alt="' + produto.nome + '" loading="lazy">' +
-            '<span class="tag">' + produto.tag + '</span>' +
-            '<button class="heart ' + (estaFavoritado ? 'on' : '') + '" data-fav="' + produto.id + '" aria-label="Favoritar">' + (estaFavoritado ? '♥' : '♡') + '</button></div>' +
-            '<div class="product-info"><span class="product-brand">' + produto.marca + '</span><h3>' + produto.nome + '</h3>' +
-            '<div class="product-bottom"><span class="price">' + formatarMoeda(produto.preco) + '</span><span>★ 4,8</span></div>' +
-            '<button class="add" data-add="' + produto.id + '">＋ ADICIONAR AO CARRINHO</button></div></article>';
-    }).join("");
+    const texto = (
+      produto.nome + " " +
+      produto.marca + " " +
+      produto.categoria + " " +
+      produto.descricao
+    ).toLocaleLowerCase("pt-BR");
 
-    const vazio = selecionar("#emptyState");
-    if (vazio) vazio.classList.toggle("hidden", lista.length > 0);
+    return correspondeCategoria &&
+      texto.includes(busca.toLocaleLowerCase("pt-BR"));
+  });
+
+  grade.innerHTML = produtos.map(produto => `
+    <article class="product">
+      <div class="product-image">
+        <img
+          src="${produto.img}"
+          alt="${produto.nome}"
+          loading="lazy"
+          onerror="tratarErroImagem(this)"
+        >
+
+        <span class="tag">${produto.tag}</span>
+
+        <button
+          class="heart ${favoritos.includes(produto.id) ? "on" : ""}"
+          data-fav="${produto.id}"
+          aria-label="Alternar favorito"
+        >
+          ${favoritos.includes(produto.id) ? "♥" : "♡"}
+        </button>
+      </div>
+
+      <div class="product-info">
+        <span class="product-brand">${produto.marca}</span>
+        <h3>${produto.nome}</h3>
+
+        <div class="product-bottom">
+          <span class="price">${moeda(produto.preco)}</span>
+          <span>★ 4,8</span>
+        </div>
+
+        <button class="add" data-add="${produto.id}">
+          ＋ ADICIONAR AO CARRINHO
+        </button>
+      </div>
+    </article>
+  `).join("");
+
+  $("#emptyState").classList.toggle("hidden", produtos.length > 0);
 }
 
+/* CINCO LOJAS */
+
 function renderLojas() {
-    const grade = selecionar("#lojasGrid");
-    if (!grade) return;
+  const grade = $("#lojasGrid");
 
-    const lista = lojas.filter(function (loja) {
-        const combinaCategoria = categoriaLoja === "Todas" || loja.categoria === categoriaLoja;
-        const textoLoja = (loja.nome + " " + loja.categoria + " " + loja.cidade + " " + loja.descricao).toLowerCase();
-        return combinaCategoria && textoLoja.includes(busca.toLowerCase());
-    });
+  const lista = lojas.filter(loja => {
+    const correspondeCategoria =
+      categoriaLoja === "Todas" ||
+      loja.categoria === categoriaLoja;
 
-    grade.innerHTML = lista.map(function (loja) {
-        return '<article class="store-card"><div class="store-cover" style="background-image:url(\'' + loja.capa + '\')">' +
-            '<span class="store-category">' + loja.categoria.toUpperCase() + '</span></div><div class="store-body">' +
-            '<h3>' + loja.nome + '</h3><p>' + loja.descricao + '</p><div class="store-meta"><span>★ ' + loja.rating + ' · ' + loja.vendas + ' vendas</span><span>' + loja.cidade + '</span></div>' +
-            '<button class="button button-outline" data-store="' + loja.id + '">Conhecer loja ↗</button></div></article>';
-    }).join("");
+    const texto = (
+      loja.nome + " " +
+      loja.categoria + " " +
+      loja.cidade + " " +
+      loja.descricao
+    ).toLocaleLowerCase("pt-BR");
 
-    if (lista.length === 0) {
-        grade.innerHTML = '<p class="section-subtitle">Nenhuma loja encontrada com esse filtro.</p>';
-    }
+    return correspondeCategoria &&
+      texto.includes(busca.toLocaleLowerCase("pt-BR"));
+  });
+
+  grade.innerHTML = lista.map(loja => `
+    <article class="store-card">
+      <div
+        class="store-cover"
+        style="background-image:linear-gradient(135deg,#d9b54b44,#070707cc),url('${loja.capa}')"
+      >
+        <span class="store-category">${loja.categoria.toUpperCase()}</span>
+      </div>
+
+      <div class="store-body">
+        <h3>${loja.nome}</h3>
+        <p>${loja.descricao}</p>
+
+        <div class="store-meta">
+          <span>★ ${loja.rating} · ${loja.vendas} vendas</span>
+          <span>${loja.cidade}</span>
+        </div>
+
+        <button class="button button-outline" data-store="${loja.id}">
+          Conhecer loja ↗
+        </button>
+      </div>
+    </article>
+  `).join("");
+
+  if (!lista.length) {
+    grade.innerHTML = `
+      <p class="section-subtitle">
+        Nenhuma loja encontrada com esse filtro.
+      </p>
+    `;
+  }
+}
+
+/* CARRINHO */
+
+function adicionarCarrinho(id) {
+  const produto = catalogo.find(p => p.id === id);
+  if (!produto) return;
+
+  const item = carrinho.find(i => i.id === id);
+
+  if (item) {
+    item.qtd++;
+  } else {
+    carrinho.push({ id, qtd: 1 });
+  }
+
+  salvarEstado();
+  renderCarrinho();
+  toast("Produto adicionado ao carrinho.");
 }
 
 function renderCarrinho() {
-    const area = selecionar("#cartItems");
-    if (!area) return;
-    let total = 0;
+  const lista = $("#cartItems");
+  let total = 0;
 
-    if (carrinho.length === 0) {
-        area.innerHTML = '<p class="empty-message">Seu carrinho está vazio. Explore as estampas e adicione sua primeira peça.</p>';
-    } else {
-        area.innerHTML = carrinho.map(function (item) {
-            const produto = catalogo.find(function (p) { return p.id === item.id; });
-            if (!produto) return "";
-            total += produto.preco * item.qtd;
-            return '<div class="cart-row"><img src="' + produto.img + '" alt="' + produto.nome + '"><div class="item-text"><strong>' + produto.nome + '</strong><small>' + formatarMoeda(produto.preco) + ' cada</small></div>' +
-                '<div class="quantity"><button data-minus="' + produto.id + '">−</button><span>' + item.qtd + '</span><button data-plus="' + produto.id + '">+</button></div>' +
-                '<button class="remove" data-remove-cart="' + produto.id + '">×</button></div>';
-        }).join("");
-    }
+  carrinho = carrinho.filter(item =>
+    catalogo.some(produto => produto.id === item.id)
+  );
 
-    const totalArea = selecionar("#cartTotal");
-    if (totalArea) totalArea.textContent = formatarMoeda(total);
+  if (!carrinho.length) {
+    lista.innerHTML = `
+      <p class="empty-message">
+        Seu carrinho está vazio. Explore as estampas e adicione sua primeira peça.
+      </p>
+    `;
+  } else {
+    lista.innerHTML = carrinho.map(item => {
+      const produto = catalogo.find(p => p.id === item.id);
+      if (!produto) return "";
+
+      total += produto.preco * item.qtd;
+
+      return `
+        <div class="cart-row">
+          <img
+            src="${produto.img}"
+            alt="${produto.nome}"
+            onerror="tratarErroImagem(this)"
+          >
+
+          <div class="item-text">
+            <strong>${produto.nome}</strong>
+            <small>${moeda(produto.preco)} cada</small>
+          </div>
+
+          <div class="quantity">
+            <button data-minus="${produto.id}" aria-label="Diminuir">−</button>
+            <span>${item.qtd}</span>
+            <button data-plus="${produto.id}" aria-label="Aumentar">+</button>
+          </div>
+
+          <button
+            class="remove"
+            data-remove-cart="${produto.id}"
+            aria-label="Remover produto"
+          >×</button>
+        </div>
+      `;
+    }).join("");
+  }
+
+  $("#cartTotal").textContent = moeda(total);
+  salvarEstado();
 }
+
+/* FAVORITOS */
 
 function renderFavoritos() {
-    const area = selecionar("#favoriteItems");
-    if (!area) return;
-    const lista = catalogo.filter(function (produto) { return favoritos.includes(produto.id); });
+  const lista = $("#favoriteItems");
 
-    if (lista.length === 0) {
-        area.innerHTML = '<p class="empty-message">Você ainda não favoritou nenhuma peça.</p>';
-        return;
-    }
+  const produtos = catalogo.filter(produto =>
+    favoritos.includes(produto.id)
+  );
 
-    area.innerHTML = lista.map(function (produto) {
-        return '<div class="favorite-row"><img src="' + produto.img + '" alt="' + produto.nome + '"><div class="item-text"><strong>' + produto.nome + '</strong><small>' + formatarMoeda(produto.preco) + '</small></div>' +
-            '<button class="button button-outline" data-go-product="' + produto.id + '">Ver peça</button><button class="remove" data-unfav="' + produto.id + '">×</button></div>';
-    }).join("");
+  lista.innerHTML = produtos.length
+    ? produtos.map(produto => `
+        <div class="favorite-row">
+          <img
+            src="${produto.img}"
+            alt="${produto.nome}"
+            onerror="tratarErroImagem(this)"
+          >
+
+          <div class="item-text">
+            <strong>${produto.nome}</strong>
+            <small>${moeda(produto.preco)}</small>
+          </div>
+
+          <button class="button button-outline" data-go-product="${produto.id}">
+            Ver peça
+          </button>
+
+          <button class="remove" data-unfav="${produto.id}">×</button>
+        </div>
+      `).join("")
+    : `<p class="empty-message">Você ainda não favoritou nenhuma peça.</p>`;
 }
 
-function renderResumoPedido() {
-    const area = selecionar("#checkoutResumo");
-    if (!area) return;
-    let total = 0;
-    let itensHtml = "";
-
-    for (let i = 0; i < carrinho.length; i++) {
-        const item = carrinho[i];
-        const produto = catalogo.find(function (p) { return p.id === item.id; });
-        if (!produto) continue;
-        const subtotal = produto.preco * item.qtd;
-        total += subtotal;
-        itensHtml += '<div class="cart-row"><img src="' + produto.img + '" alt="' + produto.nome + '"><div class="item-text"><strong>' + produto.nome + '</strong><small>' + item.qtd + ' unidade(s) · ' + formatarMoeda(subtotal) + '</small></div></div>';
-    }
-
-    area.innerHTML = '<h3>Resumo do pedido</h3>' + itensHtml + '<p class="cart-total">Total do pedido <strong>' + formatarMoeda(total) + '</strong></p>';
-}
+/* DETALHE DA LOJA */
 
 function renderDetalheLoja(id) {
-    const loja = lojas.find(function (item) { return item.id === id; });
-    if (!loja) return;
-    const produtos = catalogo.filter(function (produto) { return produto.lojaId === id; });
-    const area = selecionar("#storeDetails");
+  const loja = lojas.find(l => l.id === id);
+  if (!loja) return;
 
-    area.innerHTML = '<div class="store-detail-hero" style="background-image:url(\'' + loja.capa + '\')"><span class="store-detail-category">' + loja.categoria.toUpperCase() + '</span></div>' +
-        '<div class="store-detail-heading"><div><p class="eyebrow">LOJA INDEPENDENTE · ' + loja.cidade.toUpperCase() + '</p><h2>' + loja.nome + '</h2></div></div>' +
-        '<p><em>' + loja.slogan + '</em></p><p class="section-subtitle">' + loja.descricao + '</p>' +
-        '<div class="store-meta"><span>★ ' + loja.rating + ' avaliação demonstrativa</span><span>' + loja.vendas + ' vendas demonstrativas</span><span>' + produtos.length + ' peças na vitrine</span></div>' +
-        '<div class="store-detail-actions"><button class="button button-outline" id="backToStores">← Voltar para todas as lojas</button><button class="button button-gold" id="storeCartShortcut">Ver carrinho ▱</button></div>' +
-        '<h3>Conheça as peças desta loja</h3><div class="store-products">' + produtos.map(function (produto) {
-            return '<div class="store-product"><img src="' + produto.img + '" alt="' + produto.nome + '" loading="lazy"><strong>' + produto.nome + '</strong><small>' + formatarMoeda(produto.preco) + '</small><button class="add" data-add="' + produto.id + '">＋ Adicionar ao carrinho</button></div>';
-        }).join("") + '</div><p class="form-note">Preços, avaliações e produtos são demonstrativos. A loja real será administrada pelo vendedor após integração ao backend.</p>';
+  const produtos = catalogo.filter(p => p.lojaId === id);
 
-    selecionar("#backToStores").addEventListener("click", function () {
-        selecionar("#storeDialog").close();
-        selecionar("#lojas").scrollIntoView({ behavior: "smooth" });
-    });
+  $("#storeDetails").innerHTML = `
+    <div
+      class="store-detail-hero"
+      style="background-image:linear-gradient(135deg,#d9b54b44,#070707cc),url('${loja.capa}')"
+    >
+      <span class="store-detail-category">${loja.categoria.toUpperCase()}</span>
+    </div>
 
-    selecionar("#storeCartShortcut").addEventListener("click", function () {
-        selecionar("#storeDialog").close();
-        renderCarrinho();
-        abrirDialog("cartDialog");
-    });
+    <div class="store-detail-heading">
+      <div>
+        <p class="eyebrow">LOJA INDEPENDENTE · ${loja.cidade.toUpperCase()}</p>
+        <h2>${loja.nome}</h2>
+      </div>
+    </div>
 
-    abrirDialog("storeDialog");
+    <p><em>${loja.slogan}</em></p>
+    <p class="section-subtitle">${loja.descricao}</p>
+
+    <div class="store-meta">
+      <span>★ ${loja.rating} avaliação demonstrativa</span>
+      <span>${loja.vendas} vendas demonstrativas</span>
+      <span>${produtos.length} peças na vitrine</span>
+    </div>
+
+    <div class="store-detail-actions">
+      <button class="button button-outline" id="backToStores">
+        ← Voltar para todas as lojas
+      </button>
+
+      <button class="button button-gold" id="storeCartShortcut">
+        Ver carrinho ▱
+      </button>
+    </div>
+
+    <h3>Conheça as peças desta loja</h3>
+
+    <div class="store-products">
+      ${produtos.map(produto => `
+        <div class="store-product">
+          <img
+            src="${produto.img}"
+            alt="${produto.nome}"
+            loading="lazy"
+            onerror="tratarErroImagem(this)"
+          >
+
+          <strong>${produto.nome}</strong>
+          <small>${moeda(produto.preco)}</small>
+
+          <button class="add" data-add="${produto.id}">
+            ＋ Adicionar ao carrinho
+          </button>
+        </div>
+      `).join("")}
+    </div>
+
+    <p class="form-note">
+      Preços e avaliações são demonstrativos. A loja real será administrada
+      pelo vendedor após integração ao backend.
+    </p>
+  `;
+
+  $("#backToStores").addEventListener("click", () => {
+    $("#storeDialog").close();
+    $("#lojas").scrollIntoView({ behavior: "smooth" });
+  });
+
+  $("#storeCartShortcut").addEventListener("click", () => {
+    $("#storeDialog").close();
+    renderCarrinho();
+    abrirDialog("cartDialog");
+  });
+
+  abrirDialog("storeDialog");
 }
 
-function adicionarCarrinho(id) {
-    const item = carrinho.find(function (produto) { return produto.id === id; });
-    if (item) item.qtd++;
-    else carrinho.push({ id: id, qtd: 1 });
-    salvarEstado();
-    mostrarAviso("Produto adicionado ao carrinho.");
+/* RESUMO DA COMPRA */
+
+function renderResumoPedido() {
+  let total = 0;
+
+  const itens = carrinho.map(item => {
+    const produto = catalogo.find(p => p.id === item.id);
+    if (!produto) return "";
+
+    const subtotal = produto.preco * item.qtd;
+    total += subtotal;
+
+    return `
+      <div class="cart-row">
+        <img
+          src="${produto.img}"
+          alt="${produto.nome}"
+          onerror="tratarErroImagem(this)"
+        >
+
+        <div class="item-text">
+          <strong>${produto.nome}</strong>
+          <small>${item.qtd} unidade(s) · ${moeda(subtotal)}</small>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  $("#checkoutResumo").innerHTML = `
+    <h3>Resumo do pedido</h3>
+    ${itens}
+    <p class="cart-total">
+      Total do pedido <strong>${moeda(total)}</strong>
+    </p>
+  `;
 }
+
+/* CPF: SOMENTE 11 NÚMEROS */
+
+function configurarCPF() {
+  document.querySelectorAll(".cpf-input").forEach(input => {
+    input.inputMode = "numeric";
+    input.maxLength = 11;
+    input.minLength = 11;
+    input.pattern = "[0-9]{11}";
+
+    input.addEventListener("input", () => {
+      input.value = input.value.replace(/\D/g, "").slice(0, 11);
+
+      input.setCustomValidity(
+        input.value.length === 11
+          ? ""
+          : "O CPF deve conter exatamente 11 números."
+      );
+    });
+
+    input.addEventListener("invalid", () => {
+      input.setCustomValidity(
+        "Digite exatamente 11 números no CPF, sem pontos ou traço."
+      );
+    });
+  });
+}
+
+/* EVENTOS DO CATÁLOGO */
 
 function configurarEventos() {
-    const gradeProdutos = selecionar("#productGrid");
-    if (gradeProdutos) gradeProdutos.addEventListener("click", function (evento) {
-        const botaoFavorito = evento.target.closest("[data-fav]");
-        const botaoAdicionar = evento.target.closest("[data-add]");
+  $("#productGrid").addEventListener("click", e => {
+    const favorito = e.target.closest("[data-fav]");
+    const adicionar = e.target.closest("[data-add]");
 
-        if (botaoFavorito) {
-            const id = Number(botaoFavorito.dataset.fav);
-            if (favoritos.includes(id)) favoritos = favoritos.filter(function (itemId) { return itemId !== id; });
-            else favoritos.push(id);
-            salvarEstado();
-            renderProdutos();
-            mostrarAviso(favoritos.includes(id) ? "Adicionado aos favoritos." : "Removido dos favoritos.");
-        }
+    if (favorito) {
+      const id = Number(favorito.dataset.fav);
 
-        if (botaoAdicionar) adicionarCarrinho(Number(botaoAdicionar.dataset.add));
-    });
+      favoritos = favoritos.includes(id)
+        ? favoritos.filter(x => x !== id)
+        : [...favoritos, id];
 
-    const gradeLojas = selecionar("#lojasGrid");
-    if (gradeLojas) gradeLojas.addEventListener("click", function (evento) {
-        const botao = evento.target.closest("[data-store]");
-        if (botao) renderDetalheLoja(Number(botao.dataset.store));
-    });
+      salvarEstado();
+      renderProdutos();
+      renderFavoritos();
 
-    const detalhesLoja = selecionar("#storeDetails");
-    if (detalhesLoja) detalhesLoja.addEventListener("click", function (evento) {
-        const botao = evento.target.closest("[data-add]");
-        if (botao) adicionarCarrinho(Number(botao.dataset.add));
-    });
-
-    document.querySelectorAll("#productFilters .filter").forEach(function (botao) {
-        botao.addEventListener("click", function () {
-            document.querySelectorAll("#productFilters .filter").forEach(function (item) { item.classList.remove("active"); });
-            botao.classList.add("active");
-            categoria = botao.dataset.category;
-            renderProdutos();
-        });
-    });
-
-    document.querySelectorAll("#storeFilters .filter").forEach(function (botao) {
-        botao.addEventListener("click", function () {
-            document.querySelectorAll("#storeFilters .filter").forEach(function (item) { item.classList.remove("active"); });
-            botao.classList.add("active");
-            categoriaLoja = botao.dataset.storeCategory;
-            renderLojas();
-        });
-    });
-
-    const formularioBusca = selecionar("#searchForm");
-    if (formularioBusca) formularioBusca.addEventListener("submit", function (evento) {
-        evento.preventDefault();
-        busca = selecionar("#searchInput").value.trim();
-        categoria = "Todos";
-        categoriaLoja = "Todas";
-        document.querySelectorAll("#productFilters .filter").forEach(function (botao) { botao.classList.toggle("active", botao.dataset.category === "Todos"); });
-        document.querySelectorAll("#storeFilters .filter").forEach(function (botao) { botao.classList.toggle("active", botao.dataset.storeCategory === "Todas"); });
-        renderProdutos();
-        renderLojas();
-        selecionar("#explorar").scrollIntoView({ behavior: "smooth" });
-    });
-
-    const sellerOpen = selecionar("#sellerOpen");
-    if (sellerOpen) sellerOpen.addEventListener("click", function () { abrirDialog("sellerDialog"); });
-    const sellerOpen2 = selecionar("#sellerOpen2");
-    if (sellerOpen2) sellerOpen2.addEventListener("click", function () { abrirDialog("sellerDialog"); });
-    const clientOpen = selecionar("#clientOpen");
-    if (clientOpen) clientOpen.addEventListener("click", function () { abrirDialog("clientDialog"); });
-    const customOpen = selecionar("#customOpen");
-    if (customOpen) customOpen.addEventListener("click", function () { abrirDialog("customDialog"); });
-
-    const favTop = selecionar("#favTop");
-    if (favTop) favTop.addEventListener("click", function () { renderFavoritos(); abrirDialog("favoritesDialog"); });
-    const cartTop = selecionar("#cartTop");
-    if (cartTop) cartTop.addEventListener("click", function () { renderCarrinho(); abrirDialog("cartDialog"); });
-
-    document.querySelectorAll("[data-close]").forEach(function (botao) {
-        botao.addEventListener("click", function () {
-            const dialogo = selecionar("#" + botao.dataset.close);
-            if (dialogo) dialogo.close();
-        });
-    });
-
-    const areaCarrinho = selecionar("#cartItems");
-    if (areaCarrinho) areaCarrinho.addEventListener("click", function (evento) {
-        const mais = evento.target.closest("[data-plus]");
-        const menos = evento.target.closest("[data-minus]");
-        const remover = evento.target.closest("[data-remove-cart]");
-
-        if (mais) {
-            const itemMais = carrinho.find(function (item) { return item.id === Number(mais.dataset.plus); });
-            if (itemMais) itemMais.qtd++;
-        }
-        if (menos) {
-            const itemMenos = carrinho.find(function (item) { return item.id === Number(menos.dataset.minus); });
-            if (itemMenos) itemMenos.qtd = Math.max(1, itemMenos.qtd - 1);
-        }
-        if (remover) carrinho = carrinho.filter(function (item) { return item.id !== Number(remover.dataset.removeCart); });
-
-        salvarEstado();
-        renderCarrinho();
-    });
-
-    const areaFavoritos = selecionar("#favoriteItems");
-    if (areaFavoritos) areaFavoritos.addEventListener("click", function (evento) {
-        const remover = evento.target.closest("[data-unfav]");
-        const verProduto = evento.target.closest("[data-go-product]");
-
-        if (remover) {
-            favoritos = favoritos.filter(function (id) { return id !== Number(remover.dataset.unfav); });
-            salvarEstado();
-            renderProdutos();
-            renderFavoritos();
-        }
-        if (verProduto) {
-            selecionar("#favoritesDialog").close();
-            busca = "";
-            selecionar("#searchInput").value = "";
-            categoria = "Todos";
-            renderProdutos();
-            selecionar("#explorar").scrollIntoView({ behavior: "smooth" });
-        }
-    });
-
-    const botaoCheckout = selecionar("#checkout");
-    if (botaoCheckout) botaoCheckout.addEventListener("click", function () {
-        if (carrinho.length === 0) {
-            mostrarAviso("Adicione produtos antes de continuar.");
-            return;
-        }
-        selecionar("#cartDialog").close();
-        renderResumoPedido();
-        abrirDialog("checkoutDialog");
-    });
-
-    const formularioCheckout = selecionar("#checkoutForm");
-    if (formularioCheckout) formularioCheckout.addEventListener("submit", function (evento) {
-        evento.preventDefault();
-        if (carrinho.length === 0) {
-            mostrarAviso("Seu carrinho está vazio.");
-            selecionar("#checkoutDialog").close();
-            return;
-        }
-
-        let total = 0;
-        const itensPedido = carrinho.map(function (item) {
-            const produto = catalogo.find(function (p) { return p.id === item.id; });
-            if (produto) total += produto.preco * item.qtd;
-            return { id: item.id, qtd: item.qtd };
-        });
-
-        const pedido = {
-            numero: Date.now(),
-            data: new Date().toLocaleString("pt-BR"),
-            cliente: this.elements.nome.value,
-            email: this.elements.email.value,
-            cep: this.elements.cep.value,
-            endereco: this.elements.endereco.value,
-            cidade: this.elements.cidade.value,
-            pagamento: this.elements.pagamento.value,
-            itens: itensPedido,
-            total: total
-        };
-
-        const pedidos = lerDados("mc-pedidos", []);
-        pedidos.push(pedido);
-        localStorage.setItem("mc-pedidos", JSON.stringify(pedidos));
-        carrinho = [];
-        salvarEstado();
-        selecionar("#checkoutDialog").close();
-        this.reset();
-        mostrarAviso("Pedido demonstrativo registrado com sucesso.");
-    });
-
-    const formularioCliente = selecionar("#clientForm");
-    if (formularioCliente) formularioCliente.addEventListener("submit", function (evento) {
-        evento.preventDefault();
-        selecionar("#clientDialog").close();
-        evento.target.reset();
-        mostrarAviso("Cadastro demonstrativo preenchido. Conecte ao backend para registrar.");
-    });
-
-    const formularioVendedor = selecionar("#sellerForm");
-    if (formularioVendedor) formularioVendedor.addEventListener("submit", function (evento) {
-        evento.preventDefault();
-        selecionar("#sellerDialog").close();
-        evento.target.reset();
-        mostrarAviso("Cadastro demonstrativo preenchido. Conecte ao backend para criar uma loja real.");
-    });
-
-    const formularioPersonalizacao = selecionar("#customForm");
-    if (formularioPersonalizacao) formularioPersonalizacao.addEventListener("submit", function (evento) {
-        evento.preventDefault();
-        const ideia = Object.fromEntries(new FormData(evento.target).entries());
-        const ideiasSalvas = lerDados("mc-personalizacoes", []);
-        ideia.criadaEm = new Date().toISOString();
-        ideiasSalvas.push(ideia);
-        localStorage.setItem("mc-personalizacoes", JSON.stringify(ideiasSalvas));
-        selecionar("#customDialog").close();
-        evento.target.reset();
-        mostrarAviso("Sua ideia foi salva nesta demonstração.");
-    });
-        const grade = selecionar("#productGrid");
-    if (!grade) return;
-
-    const lista = catalogo.filter(function (produto) {
-        const combinaCategoria = categoria === "Todos" || produto.categoria === categoria;
-        const textoProduto = (
-            produto.nome + " " +
-            produto.marca + " " +
-            produto.categoria + " " +
-            produto.descricao
-        ).toLowerCase();
-
-        return combinaCategoria && textoProduto.includes(busca.toLowerCase());
-    });
-
-    grade.innerHTML = lista.map(function (produto) {
-        const estaFavoritado = favoritos.includes(produto.id);
-
-        return '<article class="product">' +
-            '<div class="product-image">' +
-            '<img src="' + produto.img + '" alt="' + produto.nome + '" loading="lazy">' +
-            '<span class="tag">' + produto.tag + '</span>' +
-            '<button class="heart ' + (estaFavoritado ? 'on' : '') +
-            '" data-fav="' + produto.id + '" aria-label="Favoritar">' +
-            (estaFavoritado ? '♥' : '♡') + '</button></div>' +
-            '<div class="product-info">' +
-            '<span class="product-brand">' + produto.marca + '</span>' +
-            '<h3>' + produto.nome + '</h3>' +
-            '<div class="product-bottom">' +
-            '<span class="price">' + formatarMoeda(produto.preco) + '</span>' +
-            '<span>★ 4,8</span></div>' +
-            '<button class="add" data-add="' + produto.id + '">' +
-            '＋ ADICIONAR AO CARRINHO</button></div></article>';
-    }).join("");
-
-    const vazio = selecionar("#emptyState");
-    if (vazio) {
-        vazio.classList.toggle("hidden", lista.length > 0);
-    }
-}
-
-function renderLojas() {
-    const grade = selecionar("#lojasGrid");
-    if (!grade) return;
-
-    const lista = lojas.filter(function (loja) {
-        const combinaCategoria =
-            categoriaLoja === "Todas" || loja.categoria === categoriaLoja;
-
-        const textoLoja = (
-            loja.nome + " " +
-            loja.categoria + " " +
-            loja.cidade + " " +
-            loja.descricao
-        ).toLowerCase();
-
-        return combinaCategoria && textoLoja.includes(busca.toLowerCase());
-    });
-
-    grade.innerHTML = lista.map(function (loja) {
-        return '<article class="store-card">' +
-            '<div class="store-cover" style="background-image:url(\'' + loja.capa + '\')">' +
-            '<span class="store-category">' + loja.categoria.toUpperCase() + '</span>' +
-            '</div><div class="store-body">' +
-            '<h3>' + loja.nome + '</h3>' +
-            '<p>' + loja.descricao + '</p>' +
-            '<div class="store-meta">' +
-            '<span>★ ' + loja.rating + ' · ' + loja.vendas + ' vendas</span>' +
-            '<span>' + loja.cidade + '</span></div>' +
-            '<button class="button button-outline" data-store="' + loja.id + '">' +
-            'Conhecer loja ↗</button></div></article>';
-    }).join("");
-
-    if (lista.length === 0) {
-        grade.innerHTML =
-            '<p class="section-subtitle">Nenhuma loja encontrada com esse filtro.</p>';
-    }
-}
-
-function renderCarrinho() {
-    const area = selecionar("#cartItems");
-    if (!area) return;
-
-    let total = 0;
-
-    if (carrinho.length === 0) {
-        area.innerHTML =
-            '<p class="empty-message">Seu carrinho está vazio. Explore as estampas e adicione sua primeira peça.</p>';
-    } else {
-        area.innerHTML = carrinho.map(function (item) {
-            const produto = catalogo.find(function (p) {
-                return p.id === item.id;
-            });
-
-            if (!produto) return "";
-
-            total += produto.preco * item.qtd;
-
-            return '<div class="cart-row">' +
-                '<img src="' + produto.img + '" alt="' + produto.nome + '">' +
-                '<div class="item-text"><strong>' + produto.nome + '</strong>' +
-                '<small>' + formatarMoeda(produto.preco) + ' cada</small></div>' +
-                '<div class="quantity">' +
-                '<button data-minus="' + produto.id + '">−</button>' +
-                '<span>' + item.qtd + '</span>' +
-                '<button data-plus="' + produto.id + '">+</button></div>' +
-                '<button class="remove" data-remove-cart="' + produto.id + '">×</button>' +
-                '</div>';
-        }).join("");
+      toast(
+        favoritos.includes(id)
+          ? "Adicionado aos favoritos."
+          : "Removido dos favoritos."
+      );
     }
 
-    const totalArea = selecionar("#cartTotal");
-    if (totalArea) totalArea.textContent = formatarMoeda(total);
-}
+    if (adicionar) {
+      adicionarCarrinho(Number(adicionar.dataset.add));
+    }
+  });
 
-function renderFavoritos() {
-    const area = selecionar("#favoriteItems");
-    if (!area) return;
+  $("#lojasGrid").addEventListener("click", e => {
+    const botao = e.target.closest("[data-store]");
 
-    const lista = catalogo.filter(function (produto) {
-        return favoritos.includes(produto.id);
+    if (botao) {
+      renderDetalheLoja(Number(botao.dataset.store));
+    }
+  });
+
+  $("#storeDetails").addEventListener("click", e => {
+    const botao = e.target.closest("[data-add]");
+
+    if (botao) {
+      adicionarCarrinho(Number(botao.dataset.add));
+    }
+  });
+
+  document.querySelectorAll("#productFilters .filter").forEach(botao => {
+    botao.addEventListener("click", () => {
+      document.querySelectorAll("#productFilters .filter")
+        .forEach(b => b.classList.remove("active"));
+
+      botao.classList.add("active");
+      categoria = botao.dataset.category;
+      renderProdutos();
     });
+  });
 
-    if (lista.length === 0) {
-        area.innerHTML =
-            '<p class="empty-message">Você ainda não favoritou nenhuma peça.</p>';
-        return;
+  document.querySelectorAll("#storeFilters .filter").forEach(botao => {
+    botao.addEventListener("click", () => {
+      document.querySelectorAll("#storeFilters .filter")
+        .forEach(b => b.classList.remove("active"));
+
+      botao.classList.add("active");
+      categoriaLoja = botao.dataset.storeCategory;
+      renderLojas();
+    });
+  });
+
+  $("#searchForm").addEventListener("submit", e => {
+    e.preventDefault();
+
+    busca = $("#searchInput").value.trim();
+    categoria = "Todos";
+    categoriaLoja = "Todas";
+
+    document.querySelectorAll("#productFilters .filter")
+      .forEach(b => b.classList.toggle(
+        "active",
+        b.dataset.category === "Todos"
+      ));
+
+    document.querySelectorAll("#storeFilters .filter")
+      .forEach(b => b.classList.toggle(
+        "active",
+        b.dataset.storeCategory === "Todas"
+      ));
+
+    renderProdutos();
+    renderLojas();
+
+    $("#explorar").scrollIntoView({ behavior: "smooth" });
+  });
+
+  $("#sellerOpen").addEventListener("click", () => abrirDialog("sellerDialog"));
+  $("#sellerOpen2").addEventListener("click", () => abrirDialog("sellerDialog"));
+  $("#clientOpen").addEventListener("click", () => abrirDialog("clientDialog"));
+  $("#customOpen").addEventListener("click", () => abrirDialog("customDialog"));
+
+  $("#favTop").addEventListener("click", () => {
+    renderFavoritos();
+    abrirDialog("favoritesDialog");
+  });
+
+  $("#cartTop").addEventListener("click", () => {
+    renderCarrinho();
+    abrirDialog("cartDialog");
+  });
+
+  document.querySelectorAll("[data-close]").forEach(botao => {
+    botao.addEventListener("click", () => {
+      const dialog = $("#" + botao.dataset.close);
+      if (dialog) dialog.close();
+    });
+  });
+
+  $("#cartItems").addEventListener("click", e => {
+    const mais = e.target.closest("[data-plus]");
+    const menos = e.target.closest("[data-minus]");
+    const remover = e.target.closest("[data-remove-cart]");
+
+    if (mais) {
+      const item = carrinho.find(i => i.id === Number(mais.dataset.plus));
+      if (item) item.qtd++;
     }
 
-    area.innerHTML = lista.map(function (produto) {
-        return '<div class="favorite-row">' +
-            '<img src="' + produto.img + '" alt="' + produto.nome + '">' +
-            '<div class="item-text"><strong>' + produto.nome + '</strong>' +
-            '<small>' + formatarMoeda(produto.preco) + '</small></div>' +
-            '<button class="button button-outline" data-go-product="' + produto.id + '">' +
-            'Ver peça</button>' +
-            '<button class="remove" data-unfav="' + produto.id + '">×</button></div>';
-    }).join("");
-}
-
-function renderResumoPedido() {
-    const area = selecionar("#checkoutResumo");
-    if (!area) return;
-
-    let total = 0;
-    let itensHtml = "";
-
-    for (let i = 0; i < carrinho.length; i++) {
-        const item = carrinho[i];
-
-        const produto = catalogo.find(function (p) {
-            return p.id === item.id;
-        });
-
-        if (!produto) continue;
-
-        const subtotal = produto.preco * item.qtd;
-        total += subtotal;
-
-        itensHtml += '<div class="cart-row">' +
-            '<img src="' + produto.img + '" alt="' + produto.nome + '">' +
-            '<div class="item-text"><strong>' + produto.nome + '</strong>' +
-            '<small>' + item.qtd + ' unidade(s) · ' +
-            formatarMoeda(subtotal) + '</small></div></div>';
+    if (menos) {
+      const item = carrinho.find(i => i.id === Number(menos.dataset.minus));
+      if (item) item.qtd = Math.max(1, item.qtd - 1);
     }
 
-    area.innerHTML = '<h3>Resumo do pedido</h3>' +
-        itensHtml +
-        '<p class="cart-total">Total do pedido <strong>' +
-        formatarMoeda(total) + '</strong></p>';
-}
-
-function renderDetalheLoja(id) {
-    const loja = lojas.find(function (item) {
-        return item.id === id;
-    });
-
-    if (!loja) return;
-
-    const produtos = catalogo.filter(function (produto) {
-        return produto.lojaId === id;
-    });
-
-    const area = selecionar("#storeDetails");
-
-    area.innerHTML =
-        '<div class="store-detail-hero" style="background-image:url(\'' + loja.capa + '\')">' +
-        '<span class="store-detail-category">' + loja.categoria.toUpperCase() + '</span></div>' +
-        '<div class="store-detail-heading"><div>' +
-        '<p class="eyebrow">LOJA INDEPENDENTE · ' + loja.cidade.toUpperCase() + '</p>' +
-        '<h2>' + loja.nome + '</h2></div></div>' +
-        '<p><em>' + loja.slogan + '</em></p>' +
-        '<p class="section-subtitle">' + loja.descricao + '</p>' +
-        '<div class="store-meta">' +
-        '<span>★ ' + loja.rating + ' avaliação demonstrativa</span>' +
-        '<span>' + loja.vendas + ' vendas demonstrativas</span>' +
-        '<span>' + produtos.length + ' peças na vitrine</span></div>' +
-        '<div class="store-detail-actions">' +
-        '<button class="button button-outline" id="backToStores">← Voltar para todas as lojas</button>' +
-        '<button class="button button-gold" id="storeCartShortcut">Ver carrinho ▱</button></div>' +
-        '<h3>Conheça as peças desta loja</h3>' +
-        '<div class="store-products">' +
-        produtos.map(function (produto) {
-            return '<div class="store-product">' +
-                '<img src="' + produto.img + '" alt="' + produto.nome + '" loading="lazy">' +
-                '<strong>' + produto.nome + '</strong>' +
-                '<small>' + formatarMoeda(produto.preco) + '</small>' +
-                '<button class="add" data-add="' + produto.id + '">' +
-                '＋ Adicionar ao carrinho</button></div>';
-        }).join("") +
-        '</div><p class="form-note">Preços, avaliações e produtos são demonstrativos. A loja real será administrada pelo vendedor após integração ao backend.</p>';
-
-    selecionar("#backToStores").addEventListener("click", function () {
-        selecionar("#storeDialog").close();
-        selecionar("#lojas").scrollIntoView({ behavior: "smooth" });
-    });
-
-    selecionar("#storeCartShortcut").addEventListener("click", function () {
-        selecionar("#storeDialog").close();
-        renderCarrinho();
-        abrirDialog("cartDialog");
-    });
-
-    abrirDialog("storeDialog");
-}
-
-function adicionarCarrinho(id) {
-    const item = carrinho.find(function (produto) {
-        return produto.id === id;
-    });
-
-    if (item) {
-        item.qtd++;
-    } else {
-        carrinho.push({ id: id, qtd: 1 });
+    if (remover) {
+      carrinho = carrinho.filter(
+        i => i.id !== Number(remover.dataset.removeCart)
+      );
     }
 
     salvarEstado();
-    mostrarAviso("Produto adicionado ao carrinho.");
+    renderCarrinho();
+  });
+
+  $("#favoriteItems").addEventListener("click", e => {
+    const remover = e.target.closest("[data-unfav]");
+    const ver = e.target.closest("[data-go-product]");
+
+    if (remover) {
+      favoritos = favoritos.filter(
+        id => id !== Number(remover.dataset.unfav)
+      );
+
+      salvarEstado();
+      renderProdutos();
+      renderFavoritos();
+    }
+
+    if (ver) {
+      $("#favoritesDialog").close();
+      busca = "";
+      $("#searchInput").value = "";
+      categoria = "Todos";
+      renderProdutos();
+      $("#explorar").scrollIntoView({ behavior: "smooth" });
+    }
+  });
+
+  $("#checkout").addEventListener("click", () => {
+    if (!carrinho.length) {
+      toast("Adicione produtos antes de continuar.");
+      return;
+    }
+
+    $("#cartDialog").close();
+    renderResumoPedido();
+    abrirDialog("checkoutDialog");
+  });
+
+  $("#checkoutForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    if (!carrinho.length) {
+      toast("Seu carrinho está vazio.");
+      $("#checkoutDialog").close();
+      return;
+    }
+
+    if (!this.reportValidity()) return;
+
+    const cpf = this.elements.cpf.value;
+
+    if (!/^\d{11}$/.test(cpf)) {
+      toast("O CPF precisa conter exatamente 11 números.");
+      this.elements.cpf.focus();
+      return;
+    }
+
+    const pedido = {
+      numero: Date.now(),
+      data: new Date().toLocaleString("pt-BR"),
+      cliente: this.elements.nome.value,
+      email: this.elements.email.value,
+      cpf,
+      cep: this.elements.cep.value,
+      endereco: this.elements.endereco.value,
+      cidade: this.elements.cidade.value,
+      pagamento: this.elements.pagamento.value,
+      itens: carrinho.map(item => ({ ...item })),
+      total: carrinho.reduce((soma, item) => {
+        const produto = catalogo.find(p => p.id === item.id);
+        return soma + (produto ? produto.preco * item.qtd : 0);
+      }, 0)
+    };
+
+    const pedidos = ler("mc-pedidos", []);
+    pedidos.push(pedido);
+
+    localStorage.setItem("mc-pedidos", JSON.stringify(pedidos));
+
+    carrinho = [];
+    salvarEstado();
+    renderCarrinho();
+
+    $("#checkoutDialog").close();
+    this.reset();
+    configurarCPF();
+
+    toast("Pedido demonstrativo registrado com sucesso.");
+  });
+
+  $("#clientForm").addEventListener("submit", e => {
+    e.preventDefault();
+
+    if (!e.target.reportValidity()) return;
+
+    const cpf = e.target.querySelector(".cpf-input");
+
+    if (cpf && !/^\d{11}$/.test(cpf.value)) {
+      toast("Digite exatamente 11 números no CPF.");
+      cpf.focus();
+      return;
+    }
+
+    $("#clientDialog").close();
+    e.target.reset();
+    configurarCPF();
+
+    toast("Cadastro demonstrativo preenchido.");
+  });
+
+  $("#sellerForm").addEventListener("submit", e => {
+    e.preventDefault();
+
+    if (!e.target.reportValidity()) return;
+
+    $("#sellerDialog").close();
+    e.target.reset();
+
+    toast("Cadastro demonstrativo preenchido.");
+  });
+
+  $("#customForm").addEventListener("submit", e => {
+    e.preventDefault();
+
+    const ideia = Object.fromEntries(new FormData(e.target).entries());
+    const ideias = ler("mc-personalizacoes", []);
+
+    ideias.push({
+      ...ideia,
+      criadaEm: new Date().toISOString()
+    });
+
+    localStorage.setItem("mc-personalizacoes", JSON.stringify(ideias));
+
+    $("#customDialog").close();
+    e.target.reset();
+
+    toast("Sua ideia foi salva nesta demonstração.");
+  });
 }
 
-function configurarEventos() {
-    const gradeProdutos = selecionar("#productGrid");
-
-    if (gradeProdutos) {
-        gradeProdutos.addEventListener("click", function (evento) {
-            const botaoFavorito = evento.target.closest("[data-fav]");
-            const botaoAdicionar = evento.target.closest("[data-add]");
-
-            if (botaoFavorito) {
-                const id = Number(botaoFavorito.dataset.fav);
-
-                if (favoritos.includes(id)) {
-                    favoritos = favoritos.filter(function (itemId) {
-                        return itemId !== id;
-                    });
-                } else {
-                    favoritos.push(id);
-                }
-
-                salvarEstado();
-                renderProdutos();
-
-                mostrarAviso(
-                    favoritos.includes(id)
-                        ? "Adicionado aos favoritos."
-                        : "Removido dos favoritos."
-                );
-            }
-
-            if (botaoAdicionar) {
-                adicionarCarrinho(Number(botaoAdicionar.dataset.add));
-            }
-        });
-    }
-
-    const gradeLojas = selecionar("#lojasGrid");
-
-    if (gradeLojas) {
-        gradeLojas.addEventListener("click", function (evento) {
-            const botao = evento.target.closest("[data-store]");
-
-            if (botao) {
-                renderDetalheLoja(Number(botao.dataset.store));
-            }
-        });
-    }
-
-    const detalhesLoja = selecionar("#storeDetails");
-
-    if (detalhesLoja) {
-        detalhesLoja.addEventListener("click", function (evento) {
-            const botao = evento.target.closest("[data-add]");
-
-            if (botao) {
-                adicionarCarrinho(Number(botao.dataset.add));
-            }
-        });
-    }
-
-    document.querySelectorAll("#productFilters .filter").forEach(function (botao) {
-        botao.addEventListener("click", function () {
-            document.querySelectorAll("#productFilters .filter").forEach(function (item) {
-                item.classList.remove("active");
-            });
-
-            botao.classList.add("active");
-            categoria = botao.dataset.category;
-            renderProdutos();
-        });
-    });
-
-    document.querySelectorAll("#storeFilters .filter").forEach(function (botao) {
-        botao.addEventListener("click", function () {
-            document.querySelectorAll("#storeFilters .filter").forEach(function (item) {
-                item.classList.remove("active");
-            });
-
-            botao.classList.add("active");
-            categoriaLoja = botao.dataset.storeCategory;
-            renderLojas();
-        });
-    });
-
-    const formularioBusca = selecionar("#searchForm");
-
-    if (formularioBusca) {
-        formularioBusca.addEventListener("submit", function (evento) {
-            evento.preventDefault();
-
-            busca = selecionar("#searchInput").value.trim();
-            categoria = "Todos";
-            categoriaLoja = "Todas";
-
-            document.querySelectorAll("#productFilters .filter").forEach(function (botao) {
-                botao.classList.toggle(
-                    "active",
-                    botao.dataset.category === "Todos"
-                );
-            });
-
-            document.querySelectorAll("#storeFilters .filter").forEach(function (botao) {
-                botao.classList.toggle(
-                    "active",
-                    botao.dataset.storeCategory === "Todas"
-                );
-            });
-
-            renderProdutos();
-            renderLojas();
-            selecionar("#explorar").scrollIntoView({ behavior: "smooth" });
-        });
-    }
-
-    const sellerOpen = selecionar("#sellerOpen");
-    if (sellerOpen) {
-        sellerOpen.addEventListener("click", function () {
-            abrirDialog("sellerDialog");
-        });
-    }
-
-    const sellerOpen2 = selecionar("#sellerOpen2");
-    if (sellerOpen2) {
-        sellerOpen2.addEventListener("click", function () {
-            abrirDialog("sellerDialog");
-        });
-    }
-
-    const clientOpen = selecionar("#clientOpen");
-    if (clientOpen) {
-        clientOpen.addEventListener("click", function () {
-            abrirDialog("clientDialog");
-        });
-    }
-
-    const customOpen = selecionar("#customOpen");
-    if (customOpen) {
-        customOpen.addEventListener("click", function () {
-            abrirDialog("customDialog");
-        });
-    }
-
-    const favTop = selecionar("#favTop");
-    if (favTop) {
-        favTop.addEventListener("click", function () {
-            renderFavoritos();
-            abrirDialog("favoritesDialog");
-        });
-    }
-
-    const cartTop = selecionar("#cartTop");
-    if (cartTop) {
-        cartTop.addEventListener("click", function () {
-            renderCarrinho();
-            abrirDialog("cartDialog");
-        });
-    }
-
-    document.querySelectorAll("[data-close]").forEach(function (botao) {
-        botao.addEventListener("click", function () {
-            const dialogo = selecionar("#" + botao.dataset.close);
-            if (dialogo) dialogo.close();
-        });
-    });
-
-    const areaCarrinho = selecionar("#cartItems");
-
-    if (areaCarrinho) {
-        areaCarrinho.addEventListener("click", function (evento) {
-            const mais = evento.target.closest("[data-plus]");
-            const menos = evento.target.closest("[data-minus]");
-            const remover = evento.target.closest("[data-remove-cart]");
-
-            if (mais) {
-                const itemMais = carrinho.find(function (item) {
-                    return item.id === Number(mais.dataset.plus);
-                });
-
-                if (itemMais) itemMais.qtd++;
-            }
-
-            if (menos) {
-                const itemMenos = carrinho.find(function (item) {
-                    return item.id === Number(menos.dataset.minus);
-                });
-
-                if (itemMenos) {
-                    itemMenos.qtd = Math.max(1, itemMenos.qtd - 1);
-                }
-            }
-
-            if (remover) {
-                carrinho = carrinho.filter(function (item) {
-                    return item.id !== Number(remover.dataset.removeCart);
-                });
-            }
-
-            salvarEstado();
-            renderCarrinho();
-        });
-    }
-
-    const areaFavoritos = selecionar("#favoriteItems");
-
-    if (areaFavoritos) {
-        areaFavoritos.addEventListener("click", function (evento) {
-            const remover = evento.target.closest("[data-unfav]");
-            const verProduto = evento.target.closest("[data-go-product]");
-
-            if (remover) {
-                favoritos = favoritos.filter(function (id) {
-                    return id !== Number(remover.dataset.unfav);
-                });
-
-                salvarEstado();
-                renderProdutos();
-                renderFavoritos();
-            }
-
-            if (verProduto) {
-                selecionar("#favoritesDialog").close();
-                busca = "";
-                selecionar("#searchInput").value = "";
-                categoria = "Todos";
-
-                renderProdutos();
-                selecionar("#explorar").scrollIntoView({ behavior: "smooth" });
-            }
-        });
-    }
-
-    const botaoCheckout = selecionar("#checkout");
-
-    if (botaoCheckout) {
-        botaoCheckout.addEventListener("click", function () {
-            if (carrinho.length === 0) {
-                mostrarAviso("Adicione produtos antes de continuar.");
-                return;
-            }
-
-            selecionar("#cartDialog").close();
-            renderResumoPedido();
-            abrirDialog("checkoutDialog");
-        });
-    }
-
-    const formularioCheckout = selecionar("#checkoutForm");
-
-    if (formularioCheckout) {
-        formularioCheckout.addEventListener("submit", function (evento) {
-            evento.preventDefault();
-
-            if (carrinho.length === 0) {
-                mostrarAviso("Seu carrinho está vazio.");
-                selecionar("#checkoutDialog").close();
-                return;
-            }
-
-            let total = 0;
-
-            const itensPedido = carrinho.map(function (item) {
-                const produto = catalogo.find(function (p) {
-                    return p.id === item.id;
-                });
-
-                if (produto) {
-                    total += produto.preco * item.qtd;
-                }
-
-                return { id: item.id, qtd: item.qtd };
-            });
-
-            const pedido = {
-                numero: Date.now(),
-                data: new Date().toLocaleString("pt-BR"),
-                cliente: this.elements.nome.value,
-                email: this.elements.email.value,
-                cep: this.elements.cep.value,
-                endereco: this.elements.endereco.value,
-                cidade: this.elements.cidade.value,
-                pagamento: this.elements.pagamento.value,
-                itens: itensPedido,
-                total: total
-            };
-
-            const pedidos = lerDados("mc-pedidos", []);
-            pedidos.push(pedido);
-
-            localStorage.setItem("mc-pedidos", JSON.stringify(pedidos));
-            carrinho = [];
-            salvarEstado();
-
-            selecionar("#checkoutDialog").close();
-            this.reset();
-
-            mostrarAviso("Pedido demonstrativo registrado com sucesso.");
-        });
-    }
-
-    const formularioCliente = selecionar("#clientForm");
-
-    if (formularioCliente) {
-        formularioCliente.addEventListener("submit", function (evento) {
-            evento.preventDefault();
-            selecionar("#clientDialog").close();
-            evento.target.reset();
-
-            mostrarAviso(
-                "Cadastro demonstrativo preenchido. Conecte ao backend para registrar."
-            );
-        });
-    }
-
-    const formularioVendedor = selecionar("#sellerForm");
-
-    if (formularioVendedor) {
-        formularioVendedor.addEventListener("submit", function (evento) {
-            evento.preventDefault();
-            selecionar("#sellerDialog").close();
-            evento.target.reset();
-
-            mostrarAviso(
-                "Cadastro demonstrativo preenchido. Conecte ao backend para criar uma loja real."
-            );
-        });
-    }
-
-    const formularioPersonalizacao = selecionar("#customForm");
-
-    if (formularioPersonalizacao) {
-        formularioPersonalizacao.addEventListener("submit", function (evento) {
-            evento.preventDefault();
-
-            const ideia = Object.fromEntries(
-                new FormData(evento.target).entries()
-            );
-
-            const ideiasSalvas = lerDados("mc-personalizacoes", []);
-            ideia.criadaEm = new Date().toISOString();
-            ideiasSalvas.push(ideia);
-
-            localStorage.setItem(
-                "mc-personalizacoes",
-                JSON.stringify(ideiasSalvas)
-            );
-
-            selecionar("#customDialog").close();
-            evento.target.reset();
-
-            mostrarAviso("Sua ideia foi salva nesta demonstração.");
-        });
-    }
+/* INICIALIZAÇÃO */
+
+function iniciarModaCustom() {
+  configurarEventos();
+  configurarCPF();
+
+  renderProdutos();
+  renderLojas();
+  renderCarrinho();
+  renderFavoritos();
+  atualizarContadores();
+
+  window.catalogoModaCustom = catalogo;
+  window.catalogoExplorar = catalogoExplorar;
+  window.lojasModaCustom = lojas;
+
+  console.info("Moda Custom carregada.");
+  console.info("Produtos:", catalogo.length);
+  console.info("Produtos em Explorar:", catalogoExplorar.length);
+  console.info("Lojas:", lojas.length);
+
+  if (new Set(catalogo.map(p => p.img)).size !== 25) {
+    console.error("Existem caminhos de imagem repetidos.");
+  }
 }
 
-configurarEventos();
-renderProdutos();
-renderLojas();
-atualizarContadores();
-
-
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", iniciarModaCustom);
+} else {
+  iniciarModaCustom();
+}
